@@ -78,8 +78,8 @@ void AMacPan::NotifyActorBeginOverlap(AActor* OtherActor)
 	{
 		if (OtherActor->IsA(ATP_SuperCoolLeft::StaticClass()))
 		{
-			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Overlaped by Left"));
 			bIsTeleporting = true;
+			MovementComponent->Velocity = FVector::ZeroVector;
 			SetActorLocation(FVector(50.f, 2080.f, 150.f), false, nullptr, ETeleportType::TeleportPhysics);
 			MovementComponent->Velocity = FVector::ZeroVector;
 			// démarre un timer pour réactiver les overlaps après 0.25s (ajuste la durée si besoin)
@@ -87,8 +87,8 @@ void AMacPan::NotifyActorBeginOverlap(AActor* OtherActor)
 		}
 		else if (OtherActor->IsA(ATP_SuperCoolRight::StaticClass()))
 		{
-			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Overlaped by Right"));
 			bIsTeleporting = true;
+			MovementComponent->Velocity = FVector::ZeroVector;
 			SetActorLocation(FVector(50.f, -2080.f, 150.f),false, nullptr, ETeleportType::TeleportPhysics);
 			MovementComponent->Velocity = FVector::ZeroVector;
 			GetWorldTimerManager().SetTimer(TeleportCooldownTimer, this, &AMacPan::ResetTeleportFlag, 0.25f, false);
